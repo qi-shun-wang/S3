@@ -27,6 +27,9 @@ public protocol S3Client: Service {
     /// Get bucket location
     func location(bucket: String, on container: Container) throws -> Future<Region>
     
+    /// Get list of objects V1
+    func list(bucket: String, region: Region?, prefix: String?, delimiter: String?, marker: String?, on container: Container) throws -> Future<BucketResults>
+    
     /// Get list of objects
     func list(bucket: String, region: Region?, on container: Container) throws -> Future<BucketResults>
     
