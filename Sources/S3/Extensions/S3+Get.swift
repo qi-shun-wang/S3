@@ -15,7 +15,7 @@ public extension S3 {
     // MARK: URL
     
     /// File URL
-    public func url(fileInfo file: LocationConvertible, on container: Container) throws -> URL {
+    func url(fileInfo file: LocationConvertible, on container: Container) throws -> URL {
         let builder = urlBuilder(for: container)
         let url = try builder.url(file: file)
         return url
@@ -24,7 +24,7 @@ public extension S3 {
     // MARK: Get
     
     /// Retrieve file data from S3
-    public func get(file: LocationConvertible, headers: [String: String], on container: Container) throws -> Future<File.Response> {
+    func get(file: LocationConvertible, headers: [String: String], on container: Container) throws -> Future<File.Response> {
         let builder = urlBuilder(for: container)
         let url = try builder.url(file: file)
         
@@ -42,7 +42,7 @@ public extension S3 {
     }
     
     /// Retrieve file data from S3
-    public func get(file: LocationConvertible, on container: Container) throws -> EventLoopFuture<File.Response> {
+    func get(file: LocationConvertible, on container: Container) throws -> EventLoopFuture<File.Response> {
         return try get(file: file, headers: [:], on: container)
     }
     

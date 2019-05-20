@@ -15,7 +15,7 @@ public extension S3 {
     // MARK: Delete
     
     /// Delete file from S3
-    public func delete(file: LocationConvertible, headers: [String: String], on container: Container) throws -> Future<Void> {
+    func delete(file: LocationConvertible, headers: [String: String], on container: Container) throws -> Future<Void> {
         let builder = urlBuilder(for: container)
         let url = try builder.url(file: file)
         
@@ -28,7 +28,7 @@ public extension S3 {
     }
     
     /// Delete file from S3
-    public func delete(file: LocationConvertible, on container: Container) throws -> Future<Void> {
+    func delete(file: LocationConvertible, on container: Container) throws -> Future<Void> {
         return try delete(file: file, headers: [:], on: container)
     }
     

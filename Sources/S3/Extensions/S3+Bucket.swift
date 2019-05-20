@@ -16,7 +16,7 @@ public extension S3 {
     // MARK: Buckets
     
     /// Get bucket location
-    public func location(bucket: String, on container: Container) throws -> Future<Region> {
+    func location(bucket: String, on container: Container) throws -> Future<Region> {
         let builder = urlBuilder(for: container)
         let region = Region.euWest2
         let url = try builder.url(region: region, bucket: bucket, path: nil)
@@ -49,7 +49,7 @@ public extension S3 {
     }
     
     /// Delete bucket
-    public func delete(bucket: String, region: Region? = nil, on container: Container) throws -> Future<Void> {
+    func delete(bucket: String, region: Region? = nil, on container: Container) throws -> Future<Void> {
         let builder = urlBuilder(for: container)
         let url = try builder.url(region: region, bucket: bucket, path: nil)
         
@@ -61,7 +61,7 @@ public extension S3 {
     }
     
     /// Create a bucket
-    public func create(bucket: String, region: Region? = nil, on container: Container) throws -> Future<Void> {
+    func create(bucket: String, region: Region? = nil, on container: Container) throws -> Future<Void> {
         let region = region ?? signer.config.region
         
         let builder = urlBuilder(for: container)

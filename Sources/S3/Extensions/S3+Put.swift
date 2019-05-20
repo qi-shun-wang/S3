@@ -16,7 +16,7 @@ public extension S3 {
     // MARK: Upload
     
     /// Upload file to S3
-    public func put(file: File.Upload, headers: [String: String], on container: Container) throws -> EventLoopFuture<File.Response> {
+    func put(file: File.Upload, headers: [String: String], on container: Container) throws -> EventLoopFuture<File.Response> {
         let builder = urlBuilder(for: container)
         let url = try builder.url(file: file)
         
@@ -41,32 +41,32 @@ public extension S3 {
     }
     
     /// Upload file to S3
-    public func put(file: File.Upload, on container: Container) throws -> EventLoopFuture<File.Response> {
+    func put(file: File.Upload, on container: Container) throws -> EventLoopFuture<File.Response> {
         return try put(file: file, headers: [:], on: container)
     }
     
     /// Upload file by it's URL to S3
-    public func put(file url: URL, destination: String, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
+    func put(file url: URL, destination: String, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
         let data: Data = try Data(contentsOf: url)
         let file = File.Upload(data: data, bucket: nil, destination: destination, access: access, mime: mimeType(forFileAtUrl: url))
         return try put(file: file, on: container)
     }
     
     /// Upload file by it's path to S3
-    public func put(file path: String, destination: String, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
+    func put(file path: String, destination: String, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
         let url: URL = URL(fileURLWithPath: path)
         return try put(file: url, destination: destination, bucket: nil, access: access, on: container)
     }
     
     /// Upload file by it's URL to S3, full set
-    public func put(file url: URL, destination: String, bucket: String?, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
+    func put(file url: URL, destination: String, bucket: String?, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
         let data: Data = try Data(contentsOf: url)
         let file = File.Upload(data: data, bucket: bucket, destination: destination, access: access, mime: mimeType(forFileAtUrl: url))
         return try put(file: file, on: container)
     }
     
     /// Upload file by it's path to S3, full set
-    public func put(file path: String, destination: String, bucket: String?, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
+    func put(file path: String, destination: String, bucket: String?, access: AccessControlList = .privateAccess, on container: Container) throws -> Future<File.Response> {
         let url: URL = URL(fileURLWithPath: path)
         return try put(file: url, destination: destination, bucket: bucket, access: access, on: container)
     }

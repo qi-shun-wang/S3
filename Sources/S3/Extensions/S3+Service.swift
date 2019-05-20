@@ -16,7 +16,7 @@ public extension S3 {
     // MARK: Buckets
     
     /// Get list of buckets
-    public func buckets(on container: Container) throws -> Future<BucketsInfo> {
+    func buckets(on container: Container) throws -> Future<BucketsInfo> {
         let builder = urlBuilder(for: container)
         let url = try builder.plain(region: nil)
         let headers = try signer.headers(for: .GET, urlString: url.absoluteString, payload: .none)
